@@ -1,0 +1,120 @@
+import java.io.*;
+import java.util.*;
+
+public class MyClass {
+    public static void main(String args[]) {
+        
+        // Max and min element in an array using minimum number of comparisons
+        
+        // Approach 1: Let us take the first element - as max, and second element - as min [use if to assign it righlty]
+        // Now, start the for loop from i = 2, and check for each element if they are greater than max OR less than min - and them update the max and min
+        
+        System.out.println("Enter the array : ");
+        int[] arr = new int[5];
+        
+        Scanner sc = new Scanner(System.in);
+        
+        for(int i=0;i<5;i++)
+        {
+            arr[i] = sc.nextInt();
+        }
+        
+        int max, min;
+        
+        if(arr[0] >= arr[1])
+        {
+            max = arr[0];
+            min = arr[1];
+        }
+        else
+        {
+            max = arr[1];
+            min = arr[0];
+        }
+        
+        for(int i=2;i<arr.length;i++)
+        {
+            if(arr[i] > max)
+            {
+                max = arr[i];
+            }
+            
+            if(arr[i] < min)
+            {
+                min = arr[i];
+            }
+        }
+        
+        System.out.println("MAX : " + max);
+        System.out.println("MIN : " + min);
+        
+        
+        // Approach 2: let us take them in pairs, so as to reduce the number of comparisons
+        
+        // As, we will be taking pairs - first thing would be to check if the array length is odd/even
+        
+        int max_new, min_new;
+        
+        int counter;
+        
+        if(arr.length % 2 == 0)     //even
+        {
+            // Put max_new and min_new rightly iin the first pair - 0 and 1 index
+            
+            if(arr[0] > arr[1])
+            {
+                max_new = arr[0];
+                min_new = arr[1];
+            }
+            else
+            {
+                max_new = arr[1];
+                min_new = arr[0];
+            }
+            
+            counter = 2;    // to start our loop from 2nd position
+        }
+        else
+        {
+            // now as it is odd length array - let us take the min_new and max_new value as of that at index 0
+            max_new = arr[0];
+            min_new = arr[0];
+            
+            counter = 1;    // to start our loop from 1st position
+        }
+        
+        while(counter < arr.length-1)
+        {
+             if(arr[counter] > arr[counter + 1])
+             {
+                if(arr[counter] > max_new)
+                {
+                    max_new = arr[counter];
+                }
+                
+                if(arr[counter + 1] < min_new)
+                {
+                    min_new = arr[counter + 1];
+                }
+             }
+             else
+             {
+                if(arr[counter + 1] > max_new)
+                {
+                    max_new = arr[counter + 1];
+                }
+                
+                if(arr[counter] < min_new)
+                {
+                    min_new = arr[counter];
+                }
+             }
+             
+             counter = counter + 2; // as we are taking pairs
+        }
+        
+        System.out.println("MAX_NEW : " + max_new);
+        System.out.println("MIN_NEW : " + min_new);
+        
+    }
+}
